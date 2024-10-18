@@ -19,3 +19,26 @@
 .flexe {
   @apply flex items-center justify-end;
 }
+
+@keyframes pulseku {
+  50% {
+    opacity: 0.5;
+  }
+}
+.animate-pulseku {
+  animation: pulseku 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes spinku {
+  to {
+    transform: rotate(360deg);
+  }
+}
+.animate-spinku {
+  animation: spinku 3s linear infinite;
+}
+
+.text-arabnya {
+  font-family: "Noto Naskh Arabic", serif;
+  @apply font-semibold;
+}

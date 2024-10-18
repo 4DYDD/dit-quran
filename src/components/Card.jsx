@@ -1,7 +1,10 @@
-import React from "react";
-import Surah from "./Surah";
+import React, { useState, useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
 
-function Card({ data }) {
+import Surahs from "./Surahs";
+import Ayats from "./Ayats";
+
+function Card({ setIsNavbar, data }) {
   const datanya = [
     {
       nama: "الفاتحة",
@@ -40,33 +43,18 @@ function Card({ data }) {
       jumlahAyat: 165,
     },
   ];
-  const samting = [
-    {
-      nomor: "",
-      nama: "",
-      namaLatin: "",
-      jumlahAyat: "",
-      tempatTurun: "",
-      arti: "",
-      deskripsi: "",
-      audioFull: {
-        "01": "",
-        "02": "",
-        "03": "",
-        "04": "",
-        "05": "",
-      },
-    },
-  ];
+
   return (
     <>
       <div className="block mx-auto">
-        <div className="flex flex-wrap content-center justify-center w-[20rem] lg:w-[90rem] font-semibold text-center text-purple-900">
-          {data.map((value, index) => (
-            <React.Fragment key={index}>
-              <Surah key={index} data={value} index={index} className={`m-2`} />
-            </React.Fragment>
-          ))}
+        <div className="flex flex-wrap content-center justify-center w-[20rem] lg:w-[90rem] font-semibold text-center text-white">
+          <Routes>
+            <Route path="/" element={<Surahs data={data} />} />
+            <Route
+              path="/surah/:nomor"
+              element={<Ayats setIsNavbar={setIsNavbar} />}
+            />
+          </Routes>
         </div>
       </div>
     </>

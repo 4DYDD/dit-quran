@@ -1,9 +1,11 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Surah({ className = "", data, index }) {
   return (
     <>
-      <button
+      <Link
+        to={`/surah/${data.nomor}`}
         className={`w-[26rem] p-3 font-normal text-[0.7rem] lg:text-[1rem] active:scale-[0.98] transall duration-200 flexc rounded shadow bg-primary ${className}`}
       >
         {/* --------------- */}
@@ -31,7 +33,7 @@ function Surah({ className = "", data, index }) {
           </span>{" "}
         </div>
         {/* --------------- */}
-      </button>
+      </Link>
     </>
   );
 }

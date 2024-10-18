@@ -8,6 +8,7 @@ export default {
         Rubik: ["Rubik", "sans-serif"],
         Montserrat: ["Montserrat", "sans-serif"],
         Righteous: ["Righteous", "sans-serif"],
+        ReadexPro: ["ReadexPro", "sans-serif"],
       },
       colors: {
         primary: "#eab308", // Warna biru utama
