@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.trans-center {
+  @apply absolute top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%];
+}
+
+.transall {
+  @apply transition-all ease-in-out;
+}
+
+.flexc {
+  @apply flex items-center justify-center;
+}
+.flexs {
+  @apply flex items-center justify-start;
+}
+.flexe {
+  @apply flex items-center justify-end;
+}
