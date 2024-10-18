@@ -8,8 +8,8 @@ function Search({ placeholder }) {
           <i className="text-primary fa-solid fa-magnifying-glass -scale-x-100 group-active:-scale-x-90 group-active:scale-y-90 transall"></i>
         </button>
         <input
-          className="h-full w-[12rem] px-3 font-semibold transition-all bg-transparent border-2 border-l text-primary border-primary focus:outline-none rounded-e placeholder:text-primary placeholder:font-semibold focus:text-[0.8rem] md:focus:text-[1rem] md:text-[1.1rem]"
-          type="text"
+          className="input-search flex h-full w-[12rem] px-3 font-semibold transition-all bg-transparent border-2 border-l text-primary border-primary focus:outline-none rounded-e placeholder:text-primary placeholder:font-semibold focus:text-[0.8rem] md:focus:text-[1rem] md:text-[1.1rem] relative"
+          type="search"
           name="search"
           id="search"
           placeholder={placeholder}

@@ -61,7 +61,7 @@ function Card({ data }) {
   return (
     <>
       <div className="block mx-auto">
-        <div className="flex flex-wrap content-center justify-center w-[30rem] md:w-[90rem] font-semibold text-center text-purple-900">
+        <div className="flex flex-wrap content-center justify-center w-[20rem] lg:w-[90rem] font-semibold text-center text-purple-900">
           {data.map((value, index) => (
             <React.Fragment key={index}>
               <Surah key={index} data={value} index={index} className={`m-2`} />
