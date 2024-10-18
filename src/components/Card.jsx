@@ -1,26 +1,7 @@
 import React from "react";
 import Surah from "./Surah";
 
-function Card({
-  data = [
-    {
-      nomor: "",
-      nama: "",
-      namaLatin: "",
-      jumlahAyat: "",
-      tempatTurun: "",
-      arti: "",
-      deskripsi: "",
-      audioFull: {
-        "01": "",
-        "02": "",
-        "03": "",
-        "04": "",
-        "05": "",
-      },
-    },
-  ],
-}) {
+function Card({ data }) {
   const datanya = [
     {
       nama: "الفاتحة",
@@ -57,6 +38,24 @@ function Card({
       namaLatin: "Al-An'am",
       arti: "Binatang Ternak",
       jumlahAyat: 165,
+    },
+  ];
+  const samting = [
+    {
+      nomor: "",
+      nama: "",
+      namaLatin: "",
+      jumlahAyat: "",
+      tempatTurun: "",
+      arti: "",
+      deskripsi: "",
+      audioFull: {
+        "01": "",
+        "02": "",
+        "03": "",
+        "04": "",
+        "05": "",
+      },
     },
   ];
   return (
