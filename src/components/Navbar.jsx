@@ -13,7 +13,6 @@ function Navbar() {
     [0, 1],
     ["rgba(217,70,239,1)", "rgba(147,51,235,1)"]
   );
-  console.log(scrollYProgress.current);
 
   return (
     <>
