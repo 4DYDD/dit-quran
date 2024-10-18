@@ -8,20 +8,19 @@ function App() {
   const [data, setData] = useState([{}]);
 
   useEffect(() => {
-    return () => {
-      const fetchData = async () => {
-        try {
-          const response = await axios.get("https://equran.id/api/v2/surat");
-          setData(response.data.data);
-          console.log("BERHASIL MENGAMBIL DATA!");
-        } catch (error) {
-          console.error(error);
-          console.log("GAGAL MENGAMBIL DATA!");
-        }
-      };
-
-      fetchData();
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("https://equran.id/api/v2/surat");
+        setData(response.data.data);
+        console.log("BERHASIL MENGAMBIL DATA!");
+        alert("AMIGO");
+      } catch (error) {
+        console.error(error);
+        console.log("GAGAL MENGAMBIL DATA!");
+      }
     };
+
+    fetchData();
   }, []);
 
   return (
