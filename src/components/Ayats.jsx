@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import { ArabicNumbers } from "react-native-arabic-numbers";
 import axios from "axios";
+import Scrollbars from "rc-scrollbars";
 
-import LoadingScreen from "./LoadingScreen";
+import labelguweh from "../assets/labelguweh.png";
+import emblemguweh from "../assets/emblemguweh.png";
 
-function Ayats({ className = "", setIsNavbar }) {
+function Ayats({ className = "" }) {
   const { nomor } = useParams();
 
   const [surahData, setSurahData] = useState({ ayat: [] });
+  const [isLoading, setIsLoading] = useState(true);
+
+  const endLoading = () => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 1000);
+  };
+  if (!surahData.ayat.length < 1) endLoading();
 
   useEffect(() => {
     setSurahData(JSON.parse(localStorage.getItem("surahData")) || { ayat: [] });
@@ -33,22 +44,41 @@ function Ayats({ className = "", setIsNavbar }) {
   return (
     <>
       <main
-        className={`w-[26rem] lg:w-[60rem] font-normal text-[0.7rem] lg:text-[1rem] flexs flex-col relative max-h-[70vh] overflow-auto ${className}`}
+        className={`w-[26rem] lg:w-[60rem] font-normal text-[0.7rem] lg:text-[1rem] flexs flex-col relative max-h-[68vh] overflow-auto rounded-lg shadow bg-dark shadow-slate-700 ${className}`}
       >
-        <div className={`bg-dark w-full rounded-t-md py-3 sticky top-0`}>
-          {surahData.namaLatin}
+        <div
+          className={`bg-gradient-to-b from-75% from-dark to-transparent ayat-header w-full py-10 sticky top-0 z-[3] flexc text-[1.3em]`}
+        >
+          <Link
+            to={`/`}
+            className="absolute text-white bg-red-500 py-1 px-3 lg:px-5 rounded-lg trans-center !left-8 lg:!left-14 hover:text-dark transall text-[0.8em]"
+          >
+            <i className="fa-solid fa-left-long"></i>
+          </Link>
+          {isLoading ? (
+            <span className="block w-[50%] h-[2.5rem] bg-white animate-pulseku"></span>
+          ) : (
+            <>
+              <img
+                className="absolute object-cover scale-x-150 size-36"
+                src={labelguweh}
+                alt="labelarabic"
+              />
+              <span className="absolute text-dark">{surahData.namaLatin}</span>
+            </>
+          )}
         </div>
-        <div className="flex-col w-full bg-yellow-600 ayat-content flexc text-[1em] pt-5">
-          {surahData.ayat.length < 1
-            ? new Array(75).fill({}).map((value, index) => {
+        <div className="flex-col w-full bg-dark ayat-content flexc text-[1em]">
+          {isLoading
+            ? new Array(5).fill({}).map((value, index) => {
                 return (
                   <React.Fragment key={index}>
                     <div className="flex-col w-full text-left flexc">
-                      <div className="flex w-full">
-                        <span className="block w-[60%] h-[3em] mx-6 lg:px-10 mb-2 mt-10 bg-yellow-700 animate-pulseku"></span>
+                      <div className="w-full flexe">
+                        <span className="block w-[60%] h-[4em] mx-6 lg:px-10 mb-4 bg-secondary animate-pulseku"></span>
                       </div>
                       <div className="flex w-full">
-                        <span className="block w-[80%] h-[3em] mx-6 lg:px-10 mb-10 bg-yellow-700 animate-pulseku"></span>
+                        <span className="block w-[80%] h-[3em] mx-6 lg:px-10 mb-14 bg-secondary animate-pulseku"></span>
                       </div>
                     </div>
                   </React.Fragment>
@@ -59,13 +89,27 @@ function Ayats({ className = "", setIsNavbar }) {
                 return (
                   <React.Fragment key={index}>
                     <div className="flex-col w-full text-[1em] flexc">
-                      <div className="px-6 lg:px-10 w-full text-end text-[2.5em] mb-2 tracking-[0.01em] leading-[2em] text-arabnya">
-                        {teksArab}
+                      <div className="flexc flex-col px-6 lg:px-10 w-full text-end text-[2.2em] mb-7 tracking-[0.02em] leading-[2.2em] text-arabnya">
+                        <div className="w-full">
+                          <span>{teksArab}</span>
+                        </div>
+                        <div className="relative self-end size-14">
+                          <span className="absolute trans-center z-[2] text-[0.6em] !top-[30px]">
+                            {ArabicNumbers(value.nomorAyat)}
+                          </span>
+                          <span className="absolute size-[3.2rem] lg:size-[4.5rem] trans-center z-[1]">
+                            <img
+                              className="object-cover"
+                              src={emblemguweh}
+                              alt="emblemarabic"
+                            />
+                          </span>
+                        </div>
                       </div>
-                      <div className="px-6 lg:px-10 w-full text-start text-[1em] mb-2 font-Rubik">
+                      <div className="px-6 lg:px-10 w-full text-start text-[1em] mb-5 font-Rubik">
                         {teksIndonesia}
                       </div>
-                      <div className="mx-6 lg:mx-10 bg-white w-[100px] h-[1.5px] mb-10 self-start rounded-full"></div>
+                      <div className="mx-6 lg:mx-10 bg-white w-[200px] h-[1.5px] mb-10 self-start rounded-full"></div>
                     </div>
                   </React.Fragment>
                 );

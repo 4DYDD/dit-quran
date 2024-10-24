@@ -11,10 +11,11 @@ export default {
         ReadexPro: ["ReadexPro", "sans-serif"],
       },
       colors: {
-        primary: "#eab308", // Warna biru utama
-        secondary: "rgb(254,252,232)", // Warna putih
-        dark: "#0f172a", // Warna putih
-        
+        primary: "#eab308", // Warna kuning utama
+        secondary: "#fefce8", // Warna putih-kuning
+        dark: "#0f172a", // Warna hitam
+        secondary: "#fefce8", // Warna putih-kuning
+        putih: "#cbd5e1", // Warna putih
       },
     },
   },

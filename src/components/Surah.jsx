@@ -1,5 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { ArabicNumbers } from "react-native-arabic-numbers";
+
+import labelguweh from "../assets/labelguweh.png";
+import emblemguweh from "../assets/emblemguweh.png";
 
 function Surah({ className = "", data }) {
   return (
@@ -27,11 +31,15 @@ function Surah({ className = "", data }) {
         {/* --------------- */}
 
         {/* --------------- */}
-        <div className="flex-[1] text-[0.8em] font-bold relative h-full">
-          <span className="bg-blue-950 size-[1.8rem] lg:size-[2.5rem] w-[2rem] lg:w-[3rem] h-[3rem] lg:h-[4rem] flexc rounded-b-xl trans-center !top-[-38px] lg:!top-[-50px] !translate-y-0"></span>{" "}
-          <span className="bg-blue-950 size-[1.8rem] lg:size-[2.7rem] flexc rotate-[45deg] trans-center">
-            <span className="block rotate-[-45deg]">{data.nomor}</span>
-          </span>{" "}
+        <div className="flex-[1] text-[1.3em] lg:text-[0.8em] font-bold relative h-full flexc">
+          <div className="absolute size-12x lg:size-16">
+            <img
+              className="object-cover"
+              src={emblemguweh}
+              alt="emblemarabic"
+            />
+          </div>
+          <span className="block">{ArabicNumbers(data.nomor)}</span>
         </div>
         {/* --------------- */}
       </Link>

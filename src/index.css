@@ -42,3 +42,20 @@
   font-family: "Noto Naskh Arabic", serif;
   @apply font-semibold;
 }
+
+/* width */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+  border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-800;
+  border-radius: 5px;
+}

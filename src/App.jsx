@@ -1,43 +1,48 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Scrollbars from "rc-scrollbars";
 
 import Navbar from "./components/Navbar";
 import Main from "./components/Main";
-import LoadingScreen from "./components/LoadingScreen";
+import Footer from "./components/footer";
 
 function App() {
   const [data, setData] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [isNavbar, setIsNavbar] = useState(true);
 
   useEffect(() => {
+    setData(JSON.parse(localStorage.getItem("data")) || null);
+
     const fetchData = async () => {
       try {
         const response = await axios.get("https://equran.id/api/v2/surat");
 
         setTimeout(() => {
+          localStorage.setItem("data", JSON.stringify(response.data.data));
           setData(response.data.data);
-          console.log(response.data.data);
         }, 1000);
       } catch (error) {
         console.error(error);
       }
     };
 
-    fetchData();
+    if (!JSON.parse(localStorage.getItem("data"))) fetchData();
   }, []);
 
   return (
     <>
-      <main
-        className={`relative bg-gradient-to-b bg-cover bg-center min-h-[100vh] flex flex-col w-full bg-fuchsia-600`}
+      <Scrollbars
+        className={`relative bg-gradient-to-b bg-cover bg-center min-h-[100vh] flexc flex-col w-full bg-fuchsia-600`}
+        universal
+        autoHide
+        renderThumbVertical={(props) => <div {...props} className="bg-dark" />}
       >
         <>
-          {isNavbar && <Navbar />}
-          <Main setIsNavbar={setIsNavbar} data={data} />
+          <Navbar />
+          <Main data={data} />
           <br />
         </>
-      </main>
+        <Footer />
+      </Scrollbars>
     </>
   );
 }
