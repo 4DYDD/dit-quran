@@ -12,7 +12,9 @@ export default {
       },
       colors: {
         primary: "#eab308", // Warna biru utama
-        secondary: "#a855f7", // Warna pink sekunder
+        secondary: "rgb(254,252,232)", // Warna putih
+        dark: "#0f172a", // Warna putih
+        
       },
     },
   },

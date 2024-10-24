@@ -10,6 +10,7 @@ function Ayats({ className = "", setIsNavbar }) {
   const [surahData, setSurahData] = useState({ ayat: [] });
 
   useEffect(() => {
+    setSurahData(JSON.parse(localStorage.getItem("surahData")) || { ayat: [] });
     // Fungsi untuk mengambil data surah berdasarkan nomor
     const fetchData = async () => {
       try {
@@ -18,7 +19,7 @@ function Ayats({ className = "", setIsNavbar }) {
         );
 
         setTimeout(() => {
-          console.log(response.data.data);
+          localStorage.setItem("surahData", JSON.stringify(response.data.data));
           setSurahData(response.data.data);
         }, 1000);
       } catch (error) {
@@ -32,77 +33,12 @@ function Ayats({ className = "", setIsNavbar }) {
   return (
     <>
       <main
-        className={`w-[26rem] lg:w-[60rem] font-normal text-[0.7rem] lg:text-[1rem] flexc flex-col ${className}`}
+        className={`w-[26rem] lg:w-[60rem] font-normal text-[0.7rem] lg:text-[1rem] flexs flex-col relative max-h-[70vh] overflow-auto ${className}`}
       >
-        <div className="ayat-header w-full h-[4rem] lg:h-[5rem] text-[1em] p-3 rounded-t shadow bg-primary flexc">
-          {surahData.ayat.length < 1 ? (
-            <>
-              {/* --------------- */}
-              <div className="flexc flex-col flex-[1.5] me-3">
-                <div className="flex-[1] text-[1.2em] font-bold font-Rubik mb-2 self-start">
-                  <span className="block w-[4.7em] h-[1.5em] bg-yellow-600 animate-pulseku"></span>
-                </div>
-                <div className="flex-[1] text-[0.85em] self-start">
-                  <span className="block w-[6.2em] h-[1.5em] bg-yellow-600 animate-pulseku"></span>
-                </div>
-              </div>
-              {/* --------------- */}
-
-              {/* --------------- */}
-              <div className="text-left flex-col flex-[4]">
-                <div className="flex-[4] text-[1.1em] font-bold mb-2">
-                  <span className="block w-[7em] h-[1.6em] bg-yellow-600 animate-pulseku"></span>
-                </div>
-                <div className="flex-[4] text-[0.9em]">
-                  <span className="block w-[12em] h-[1.5em] bg-yellow-600 animate-pulseku"></span>
-                </div>
-              </div>
-              {/* --------------- */}
-
-              {/* --------------- */}
-              <div className="flex-[1] text-[1em] lg:text-[0.8em] font-bold relative animate-spinku">
-                <span className="bg-yellow-600 animate-pulseku size-[1.8rem] lg:size-[2rem] flexc trans-center rounded rotate-[45deg]">
-                  <span className="block rotate-[-45deg]">{""}</span>
-                </span>
-              </div>
-              {/* --------------- */}
-            </>
-          ) : (
-            <>
-              {/* --------------- */}
-              <div className="flexc flex-col flex-[1.5] me-3">
-                <div className="flex-[1] text-[1.2em] font-bold font-Rubik">
-                  {surahData.nama}
-                </div>
-                <div className="flex-[1] text-[0.85em]">
-                  {surahData.jumlahAyat} Ayat
-                </div>
-              </div>
-              {/* --------------- */}
-
-              {/* --------------- */}
-              <div className="text-left flex-col flex-[4]">
-                <div className="flex-[4] text-[1.1em] font-bold">
-                  {surahData.namaLatin}
-                </div>
-                <div className="flex-[4] text-[0.9em]">{surahData.arti}</div>
-              </div>
-              {/* --------------- */}
-
-              {/* --------------- */}
-              <div className="flex-[1] text-[1em] lg:text-[0.8em] font-bold relative">
-                <span className="bg-yellow-600 size-[1.8rem] lg:size-[2rem] flexc trans-center rounded rotate-[45deg]">
-                  <span className="block rotate-[-45deg]">
-                    {surahData.nomor}
-                  </span>
-                </span>
-              </div>
-              {/* --------------- */}
-            </>
-          )}
+        <div className={`bg-dark w-full rounded-t-md py-3 sticky top-0`}>
+          {surahData.namaLatin}
         </div>
-
-        <div className="flex-col w-full bg-yellow-600 ayat-content flexc text-[1em]">
+        <div className="flex-col w-full bg-yellow-600 ayat-content flexc text-[1em] pt-5">
           {surahData.ayat.length < 1
             ? new Array(75).fill({}).map((value, index) => {
                 return (

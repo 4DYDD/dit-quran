@@ -2,11 +2,11 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 import Navbar from "./components/Navbar";
-import Card from "./components/Card";
+import Main from "./components/Main";
 import LoadingScreen from "./components/LoadingScreen";
 
 function App() {
-  const [data, setData] = useState();
+  const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isNavbar, setIsNavbar] = useState(true);
 
@@ -30,11 +30,11 @@ function App() {
   return (
     <>
       <main
-        className={`relative bg-gradient-to-b from-fuchsia-500 to-purple-600 bg-cover bg-center min-h-[100vh] flex flex-col w-full`}
+        className={`relative bg-gradient-to-b bg-cover bg-center min-h-[100vh] flex flex-col w-full bg-fuchsia-600`}
       >
         <>
           {isNavbar && <Navbar />}
-          <Card setIsNavbar={setIsNavbar} data={data} />
+          <Main setIsNavbar={setIsNavbar} data={data} />
           <br />
         </>
       </main>
