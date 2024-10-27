@@ -7,7 +7,7 @@ function Surahs({ data }) {
   const endLoading = () => {
     setTimeout(() => {
       setIsLoading(false);
-    }, 1000);
+    }, 500);
   };
   if (data) endLoading();
 

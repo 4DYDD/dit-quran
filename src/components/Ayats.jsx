@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import { ArabicNumbers } from "react-native-arabic-numbers";
+import ArabicNumbers from "../js/ArabicNumbers";
 import axios from "axios";
 import Scrollbars from "rc-scrollbars";
 
@@ -32,7 +32,7 @@ function Ayats({ className = "" }) {
         setTimeout(() => {
           localStorage.setItem("surahData", JSON.stringify(response.data.data));
           setSurahData(response.data.data);
-        }, 1000);
+        }, 500);
       } catch (error) {
         console.error(error);
       }
@@ -50,6 +50,10 @@ function Ayats({ className = "" }) {
           className={`bg-gradient-to-b from-75% from-dark to-transparent ayat-header w-full py-10 sticky top-0 z-[3] flexc text-[1.3em]`}
         >
           <Link
+            onClick={(e) => {
+              localStorage.removeItem("surahData");
+              setSurahData({ ayat: [] });
+            }}
             to={`/`}
             className="absolute text-white bg-red-500 py-1 px-3 lg:px-5 rounded-lg trans-center !left-8 lg:!left-14 hover:text-dark transall text-[0.8em]"
           >
@@ -85,17 +89,17 @@ function Ayats({ className = "" }) {
                 );
               })
             : surahData.ayat.map((value, index) => {
-                const { teksArab, teksIndonesia } = value;
+                const { teksArab, nomorAyat, teksIndonesia } = value;
                 return (
                   <React.Fragment key={index}>
-                    <div className="flex-col w-full text-[1em] flexc">
+                    <div className="flex-col w-full text-[1em] flexc py-5">
                       <div className="flexc flex-col px-6 lg:px-10 w-full text-end text-[2.2em] mb-7 tracking-[0.02em] leading-[2.2em] text-arabnya">
                         <div className="w-full">
                           <span>{teksArab}</span>
                         </div>
                         <div className="relative self-end size-14">
                           <span className="absolute trans-center z-[2] text-[0.6em] !top-[30px]">
-                            {ArabicNumbers(value.nomorAyat)}
+                            {ArabicNumbers(nomorAyat)}
                           </span>
                           <span className="absolute size-[3.2rem] lg:size-[4.5rem] trans-center z-[1]">
                             <img

@@ -7,7 +7,7 @@ function Image({ src, className = "" }) {
         className={`rounded-full w-[1em] h-[1em] flex justify-center items-center relative overflow-hidden ${className}`}
       >
         <img
-          className={`w-full h-full trans-center drop-shadow-md`}
+          className={`w-full h-full trans-center drop-shadow-lg`}
           src={src}
           alt="profile picture"
         />

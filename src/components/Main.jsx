@@ -8,7 +8,7 @@ function Main({ data }) {
   return (
     <>
       <div className="block mx-auto">
-        <div className="flex flex-wrap content-center justify-center m-auto w-[20rem] lg:w-[90rem] font-semibold text-center text-putih overflow-hidden pt-3">
+        <div className="flex flex-wrap content-center justify-center m-auto w-[20rem] md:w-full font-semibold text-center text-putih overflow-hidden pt-3">
           <Routes>
             <Route path="/" element={<Surahs data={data} />} />
             <Route path="/surah/:nomor" element={<Ayats />} />

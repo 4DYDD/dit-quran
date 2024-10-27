@@ -7,7 +7,7 @@ function Sort({ placeholder }) {
     <>
       <div
         onClick={() => setToggle(!toggle)}
-        className="flexc h-[2em] text-[0.1em] my-auto"
+        className="flexc h-[2em] text-[0.1em] my-auto shadow"
       >
         <button className="h-full w-[2.5rem] bg-slate-200 flexc rounded-s group relative">
           {toggle ? (
@@ -16,18 +16,18 @@ function Sort({ placeholder }) {
             <i className="text-dark fa-solid fa-sort -scale-x-100 group-active:-scale-x-90 group-active:scale-y-90 transall"></i>
           )}
           <div
-            className={`absolute top-12 left-0 flexs !items-start flex-col w-[15rem] text-[0.8rem] overflow-hidden bg-white rounded-md shadow ${
+            className={`absolute top-12 left-0 flexs !items-start flex-col w-[15rem] text-[0.65rem] lg:text-[0.8rem] overflow-hidden bg-white rounded-md shadow ${
               !toggle && "!hidden"
             }`}
           >
             <li className="w-full py-1 hover:bg-slate-100 flexs before:content-['◊'] before:mx-2">
-              urutan turunnya surah
+              menu1
             </li>
             <li className="w-full py-1 hover:bg-slate-100 flexs before:content-['◊'] before:mx-2">
-              abjad nama surah
+              menu2
             </li>
             <li className="w-full py-1 hover:bg-slate-100 flexs before:content-['◊'] before:mx-2">
-              jumlah ayat surah
+              menu3
             </li>
             <li className="w-full py-1 hover:bg-slate-100 flexs before:content-['◊'] before:mx-2">
               menu4
