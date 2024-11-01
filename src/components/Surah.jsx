@@ -9,6 +9,8 @@ function Surah({ className = "", data }) {
   return (
     <>
       <Link
+        // id={data.o}
+        id={data.nomor}
         to={`/surah/${data.nomor}`}
         className={`w-[26rem] md:w-[20rem] lg:w-[26rem] p-3 font-normal text-[0.7rem] md:text-[0.8rem] lg:text-[1rem] active:scale-[0.98] transall duration-200 flexc overflow-hidden rounded shadow bg-gradient-to-b to-slate-900 from-black ${className}`}
       >

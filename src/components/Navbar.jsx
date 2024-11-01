@@ -8,7 +8,7 @@ import Image from "./Image";
 import Search from "./Search";
 import Sort from "./Sort";
 
-function Navbar() {
+function Navbar({ data }) {
   return (
     <>
       <motion.div
@@ -20,7 +20,7 @@ function Navbar() {
           </Link>
           <div className="flexe !justify-center lg:!justify-end text-[1em] gap-5 w-full lg:w-[80rem] tracking-[1px]">
             <Sort placeholder={`Sort`} />
-            <Search placeholder={`Search`} />
+            <Search data={data} placeholder={`Search`} />
           </div>
           <div className="rounded-b-full bg-dark h-[8px] w-[20rem] lg:w-[85rem] my-2"></div>
         </div>
