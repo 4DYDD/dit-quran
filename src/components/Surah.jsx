@@ -12,14 +12,42 @@ function Surah({ className = "", data }) {
         // id={data.o}
         id={data.nomor}
         to={`/surah/${data.nomor}`}
-        className={`w-[26rem] md:w-[20rem] lg:w-[26rem] p-3 font-normal text-[0.7rem] md:text-[0.8rem] lg:text-[1rem] active:scale-[0.98] transall duration-200 flexc overflow-hidden rounded shadow bg-gradient-to-b to-slate-900 from-black ${className}`}
+        className={`
+          w-[26rem] md:w-[20rem] lg:w-[26rem]
+          p-3
+          font-normal text-[0.7rem] md:text-[0.8rem] lg:text-[1rem]
+          active:scale-[0.98]
+          transall duration-200
+          flexc
+          overflow-hidden
+          rounded
+          shadow
+          bg-gradient-to-b to-slate-900 from-black
+          ${className}
+          `}
       >
         {/* --------------- */}
-        <div className="flexc flex-col flex-[1.5] me-3">
-          <div className="flex-[1] text-[1.2em] font-bold font-Rubik">
+        <div
+          className={`
+          flexc flex-col flex-[1.5]
+          me-3
+          `}
+        >
+          <div
+            className={`
+            flex-[1] text-[1.2em] font-bold font-Rubik
+            `}
+          >
             {data.nama}{" "}
           </div>
-          <div className="flex-[1] text-[0.85em]">{data.jumlahAyat} Ayat</div>
+          <div
+            className={`
+            flex-[1]
+            text-[0.85em]
+            `}
+          >
+            {data.jumlahAyat} Ayat
+          </div>
         </div>
         {/* --------------- */}
 
@@ -37,15 +65,23 @@ function Surah({ className = "", data }) {
         {/* --------------- */}
 
         {/* --------------- */}
-        <div className="flex-[1] text-[1.3em] md:text-[0.8em] lg:text-[0.8em] font-bold relative h-full flexc">
-          <div className="absolute size-12x lg:size-16">
+        <div
+          className={`
+            h-full
+            flex-[1]
+            flexc
+            text-[1em] md:text-[0.8em] lg:text-[0.8em] font-bold
+            relative
+            `}
+        >
+          <div className="absolute size-12 lg:size-16">
             <img
               className="object-cover"
               src={emblemguweh}
               alt="emblemarabic"
             />
           </div>
-          <span className="block">{ArabicNumbers(data.nomor)}</span>
+          <span className="block">{data.nomor}</span>
         </div>
         {/* --------------- */}
       </Link>

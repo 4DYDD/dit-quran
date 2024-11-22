@@ -19,8 +19,8 @@ function Navbar({ data }) {
             <Image src={my_quran} />
           </Link>
           <div className="flexe !justify-center lg:!justify-end text-[1em] gap-5 w-full lg:w-[80rem] tracking-[1px]">
-            <Sort placeholder={`Sort`} />
-            <Search data={data} placeholder={`Search`} />
+            <Sort placeholder={`Urutkan`} />
+            <Search data={data} placeholder={`Cari Surah`} />
           </div>
           <div className="rounded-b-full bg-dark h-[8px] w-[20rem] lg:w-[85rem] my-2"></div>
         </div>
