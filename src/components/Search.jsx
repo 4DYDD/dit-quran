@@ -5,6 +5,22 @@ function Search({ data, placeholder }) {
   const [value, setValue] = useState(null);
   const [suggestion, setSuggestion] = useState([]);
   const [isToggle, setIsToggle] = useState(false);
+  const [searchSebelumnya, setSearchSebelumnya] = useState(null);
+
+  // GLOBAL DOM FUNCTION
+  document.addEventListener("keydown", (event) => {
+    if (event.key.toLowerCase() === "k" && event.ctrlKey) {
+      event.preventDefault();
+      myInput.current.focus();
+    }
+    if (
+      event.key.toLowerCase() === "escape" &&
+      document.activeElement === myInput.current
+    ) {
+      event.preventDefault();
+      myInput.current.blur();
+    }
+  });
 
   // tutup suggestion
   useEffect(() => {
@@ -46,17 +62,51 @@ function Search({ data, placeholder }) {
     console.log(filteredSearch);
   };
 
+  function tambahKelas(elemen, kelas) {
+    kelas.forEach((kel) => {
+      elemen.classList.add(kel);
+    });
+  }
+
+  function hapusKelas(elemen, kelas) {
+    kelas.forEach((kel) => {
+      elemen.classList.remove(kel);
+    });
+  }
+
+  const animate = (elemenTarget) => {
+    // hapus searchSebelumnya
+    if (searchSebelumnya) {
+      hapusKelas(searchSebelumnya, [
+        "!to-emerald-700",
+        "!from-emerald-700",
+        "animate-bounceku",
+      ]);
+    }
+    setSearchSebelumnya(elemenTarget);
+
+    // jadikan searchPertama
+    tambahKelas(elemenTarget, [
+      "!to-emerald-700",
+      "!from-emerald-700",
+      "animate-bounceku",
+    ]);
+  };
+
   const searching = (value) => {
     const dataDicari = data.find((datanya) => datanya.namaLatin == value).nomor;
 
-    const elemenTarget = document.getElementById(`${dataDicari}`);
+    const elemenTarget = document.getElementById(`${dataDicari}-${dataDicari}`);
+
     elemenTarget.scrollIntoView({
       block: "center",
       behavior: "smooth",
-      blockOffset: 500,
+      blockOffset: 200,
     });
 
-    elemenTarget.classList.toggle("!bg-red-500");
+    animate(elemenTarget);
+    myInput.current.value = value;
+    changeValue();
   };
 
   return (
@@ -70,7 +120,8 @@ function Search({ data, placeholder }) {
           ></i>
         </button>
         <input
-          onChange={() => {
+          onChange={(e) => {
+            e.preventDefault();
             changeValue();
           }}
           onFocus={() => {
@@ -85,10 +136,10 @@ function Search({ data, placeholder }) {
             font-semibold
             transition-all
             rounded-e
-            text-slate-300
             bg-dark border-dark border-2 border-l
             placeholder:text-slate-300 placeholder:font-semibold
-            focus:outline-none focus:text-[0.6rem] text-[0.65rem] lg:text-[1rem] focus:lg:text-[0.9rem]
+            focus:outline-none focus:text-[0.6rem] focus:text-slate-300 focus:lg:text-[0.9rem] 
+            text-[0.65rem] text-slate-500 lg:text-[1rem] 
             relative
             `}
           type="search"
@@ -96,6 +147,16 @@ function Search({ data, placeholder }) {
           id="search"
           placeholder={placeholder}
         />
+        <span
+          className={`
+        absolute
+        -top-6 left-0
+        text-[0.8em] text-transparent lg:text-fuchsia-500 text-center
+        w-full
+          `}
+        >
+          {`[ctrl + K untuk fokus]`}
+        </span>
 
         {/* === SUGGESTION === */}
         <div
@@ -120,7 +181,14 @@ function Search({ data, placeholder }) {
                 onClick={() => {
                   searching(value);
                 }}
-                className="w-full py-1 hover:bg-slate-100 flexs before:content-['⇒'] before:font-bold before:mx-2"
+                className={`
+                  w-full
+                  py-1
+                  hover:bg-slate-100
+                  flexs
+                  before:content-['⇒'] before:font-bold before:mx-2
+                  focus:outline-none focus:bg-slate-200 focus:rounded-r-md
+                  `}
               >
                 {value}
               </button>

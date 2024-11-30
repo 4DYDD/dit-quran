@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Surah from "./Surah";
 import SkeletonSurah from "./SkeletonSurah";
 
-function Surahs({ data }) {
+function Surahs({ data, setPage }) {
   const [isLoading, setIsLoading] = useState(true);
   const endLoading = () => {
     setTimeout(() => {
@@ -10,6 +10,10 @@ function Surahs({ data }) {
     }, 500);
   };
   if (data) endLoading();
+
+  useEffect(() => {
+    setPage("home");
+  }, []);
 
   return (
     <>
@@ -22,7 +26,7 @@ function Surahs({ data }) {
         : data.map((value, index) => {
             return (
               <React.Fragment key={index + 1}>
-                <Surah data={value} className={`m-2`} />
+                <Surah data={value} setPage={setPage} className={`m-2`} />
               </React.Fragment>
             );
           })}

@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 
 function App() {
   const [data, setData] = useState(null);
+  const [page, setPage] = useState("home");
 
   useEffect(() => {
     setData(JSON.parse(localStorage.getItem("data")) || null);
@@ -37,8 +38,8 @@ function App() {
         renderThumbVertical={(props) => <div {...props} className="bg-dark" />}
       >
         <>
-          <Navbar data={data} />
-          <Main data={data} />
+          <Navbar data={data} page={page} />
+          <Main data={data} setPage={setPage} />
           <br />
         </>
         <Footer />

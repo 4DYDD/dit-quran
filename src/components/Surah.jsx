@@ -5,12 +5,12 @@ import ArabicNumbers from "../js/ArabicNumbers";
 import labelguweh from "../assets/labelguweh.png";
 import emblemguweh from "../assets/emblemguweh.png";
 
-function Surah({ className = "", data }) {
+function Surah({ className = "", data, setPage }) {
   return (
     <>
       <Link
         // id={data.o}
-        id={data.nomor}
+        id={`${data.nomor}-${data.nomor}`}
         to={`/surah/${data.nomor}`}
         className={`
           w-[26rem] md:w-[20rem] lg:w-[26rem]

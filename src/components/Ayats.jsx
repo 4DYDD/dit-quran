@@ -7,7 +7,7 @@ import Scrollbars from "rc-scrollbars";
 import labelguweh from "../assets/labelguweh.png";
 import emblemguweh from "../assets/emblemguweh.png";
 
-function Ayats({ className = "" }) {
+function Ayats({ className = "", setPage }) {
   const { nomor } = useParams();
 
   const [surahData, setSurahData] = useState({ ayat: [] });
@@ -39,6 +39,10 @@ function Ayats({ className = "" }) {
     };
 
     fetchData();
+  }, []);
+
+  useEffect(() => {
+    setPage("surah");
   }, []);
 
   return (

@@ -8,7 +8,7 @@ import Image from "./Image";
 import Search from "./Search";
 import Sort from "./Sort";
 
-function Navbar({ data }) {
+function Navbar({ data, page }) {
   return (
     <>
       <motion.div
@@ -18,10 +18,20 @@ function Navbar({ data }) {
           <Link to={``} className="flexc text-[1em]">
             <Image src={my_quran} />
           </Link>
-          <div className="flexe !justify-center lg:!justify-end text-[1em] gap-5 w-full lg:w-[80rem] tracking-[1px]">
-            <Sort placeholder={`Urutkan`} />
-            <Search data={data} placeholder={`Cari Surah`} />
-          </div>
+          {page == "home" && (
+            <div className="flexe !justify-center lg:!justify-end text-[1em] gap-5 w-full lg:w-[80rem] tracking-[1px]">
+              <Sort placeholder={`Urutkan`} />
+              <Search data={data} placeholder={`Cari Surah`} />
+            </div>
+          )}
+
+          {page == "surah" && (
+            <div className="flexe !justify-center lg:!justify-end text-[1em] gap-5 w-full lg:w-[80rem] tracking-[1px]">
+              <Sort placeholder={`# development #`} />
+              <Search data={data} placeholder={`# development #`} />
+            </div>
+          )}
+
           <div className="rounded-b-full bg-dark h-[8px] w-[20rem] lg:w-[85rem] my-2"></div>
         </div>
       </motion.div>
