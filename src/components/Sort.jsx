@@ -1,13 +1,71 @@
 import { span } from "framer-motion/client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-function Sort({ placeholder }) {
+function Sort({ placeholder, data, setData }) {
   const [toggle, setToggle] = useState(false);
+  const [dataAwal, setDataAwal] = useState(null);
+
+  // GLOBAL DOM FUNCTION
+  // document.addEventListener("click", (event) => {});
+
+  const urutkanAsc = () => {
+    const sortedData = [...data].sort((a, b) => a.nomor - b.nomor);
+    setData(sortedData);
+    console.log("Asc ↑");
+  };
+
+  const urutkanDesc = () => {
+    const sortedData = [...data].sort((a, b) => b.nomor - a.nomor);
+    setData(sortedData);
+    console.log("Desc ↓");
+  };
+
+  const urutkanSurahMakkiyah = () => {
+    // Mekah
+    const sortedDataMekah = [...dataAwal].filter(
+      (value, index) => value.tempatTurun == "Mekah"
+    );
+    const jumlahSortedDataMekah = sortedDataMekah.length;
+
+    // === NANTI BUATKAN TITLE JUMLAH SURAH DIDAPATKAN ===
+
+    setData(sortedDataMekah);
+    console.log(sortedDataMekah);
+    console.log("Surah Makkiyah");
+  };
+
+  const urutkanSurahMadaniyah = () => {
+    // Madinah
+    const sortedDataMadinah = [...dataAwal].filter(
+      (value, index) => value.tempatTurun == "Madinah"
+    );
+    const jumlahSortedDataMadinah = sortedDataMadinah.length;
+
+    // === NANTI BUATKAN TITLE JUMLAH SURAH DIDAPATKAN ===
+
+    setData(sortedDataMadinah);
+    console.log(sortedDataMadinah);
+    console.log("Surah Madaniyah");
+  };
+
+  const urutkanJumlahAyat = () => {
+    console.log("jumlah ayat");
+  };
+
+  useEffect(() => {
+    if (!dataAwal && data) {
+      console.log(data);
+      setDataAwal([...data]);
+    }
+  }, [data]);
 
   return (
     <>
       <div
-        onClick={() => setToggle(!toggle)}
+        id="sortnya"
+        onClick={() => {
+          setToggle(!toggle);
+        }}
         className="flexc h-[2em] text-[0.1em] my-auto shadow"
       >
         <button className="h-full w-[2.5rem] bg-slate-200 flexc rounded-s group relative">
@@ -34,30 +92,64 @@ function Sort({ placeholder }) {
             `}
           >
             {[
-              <span className="leading-none flexc">
+              // MENU 1
+              <span
+                onClick={() => {
+                  urutkanAsc();
+                }}
+                className="leading-none flexc"
+              >
                 {`Surah [ 1 `}
                 <span className="px-1.5">
                   <i className="fa-solid fa-right-long"></i>
                 </span>
                 {`114 ]`}
               </span>,
-              <span className="leading-none flexc">
+
+              // MENU 2
+              <span
+                onClick={() => {
+                  urutkanDesc();
+                }}
+                className="leading-none flexc"
+              >
                 {`Surah [ 114 `}
                 <span className="px-1.5">
                   <i className="fa-solid fa-right-long"></i>
                 </span>
                 {`1 ]`}
               </span>,
-              <span className="leading-none flexc">
-                <span>Tempat turunnya surah</span>
+
+              // MENU 3
+              <span
+                onClick={() => {
+                  urutkanSurahMakkiyah();
+                }}
+                className="leading-none flexc"
+              >
+                <span>Surah Makkiyah</span>
               </span>,
-              <span className="leading-none flexc">
+
+              // MENU 4
+              <span
+                onClick={() => {
+                  urutkanSurahMadaniyah();
+                }}
+                className="leading-none flexc"
+              >
+                {" "}
+                <span>Surah Madaniyah</span>
+              </span>,
+
+              // MENU 5
+              <span
+                onClick={() => {
+                  urutkanJumlahAyat();
+                }}
+                className="leading-none flexc"
+              >
                 {" "}
                 <span>Jumlah ayat</span>
-              </span>,
-              <span className="leading-none flexc">
-                {" "}
-                <span>Juz</span>
               </span>,
             ].map((menu, index) => (
               <li
@@ -96,7 +188,7 @@ function Sort({ placeholder }) {
             relative
             flex
             `}
-          type="search"
+          type="text"
           name="sort"
           id="sort"
           placeholder={placeholder}

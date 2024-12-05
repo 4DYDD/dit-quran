@@ -38,7 +38,7 @@ function App() {
         renderThumbVertical={(props) => <div {...props} className="bg-dark" />}
       >
         <>
-          <Navbar data={data} page={page} />
+          <Navbar data={data} setData={setData} page={page} />
           <Main data={data} setPage={setPage} />
           <br />
         </>

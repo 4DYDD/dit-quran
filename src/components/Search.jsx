@@ -59,7 +59,6 @@ function Search({ data, placeholder }) {
   // suggestion
   const showSuggestion = (filteredSearch) => {
     setSuggestion(filteredSearch);
-    console.log(filteredSearch);
   };
 
   function tambahKelas(elemen, kelas) {

@@ -1,14 +1,13 @@
 import { Link } from "react-router-dom";
 import { motion, useScroll, useTransform } from "framer-motion";
 
-import quran from "../assets/quran.png";
 import my_quran from "../assets/my_quran.png";
 
 import Image from "./Image";
 import Search from "./Search";
 import Sort from "./Sort";
 
-function Navbar({ data, page }) {
+function Navbar({ data, setData, page }) {
   return (
     <>
       <motion.div
@@ -20,7 +19,7 @@ function Navbar({ data, page }) {
           </Link>
           {page == "home" && (
             <div className="flexe !justify-center lg:!justify-end text-[1em] gap-5 w-full lg:w-[80rem] tracking-[1px]">
-              <Sort placeholder={`Urutkan`} />
+              <Sort data={data} setData={setData} placeholder={`Urutkan`} />
               <Search data={data} placeholder={`Cari Surah`} />
             </div>
           )}
