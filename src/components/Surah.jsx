@@ -35,7 +35,7 @@ function Surah({ className = "", data, setPage }) {
         >
           <div
             className={`
-            flex-[1] text-[1.2em] font-bold font-Rubik
+            flex-[1] text-[1.5em] md:text-[1.3em] font-bold text-arabnya
             `}
           >
             {data.nama}{" "}
