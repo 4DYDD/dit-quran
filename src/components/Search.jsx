@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useRef } from "react";
 
-function Search({ data, placeholder }) {
-  const myInput = useRef(null);
-  const [value, setValue] = useState(null);
-  const [suggestion, setSuggestion] = useState([]);
+function Search({
+  data,
+  placeholder,
+  batalkanSearch,
+  suggestion,
+  setSuggestion,
+  animate,
+  myInput,
+  changeValue,
+  value,
+}) {
+  // const [suggestion, setSuggestion] = useState([]);
   const [isToggle, setIsToggle] = useState(false);
-  const [searchSebelumnya, setSearchSebelumnya] = useState(null);
+  // const [searchSebelumnya, setSearchSebelumnya] = useState(null);
 
   // GLOBAL DOM FUNCTION
   document.addEventListener("keydown", (event) => {
-    if (event.key.toLowerCase() === "k" && event.ctrlKey) {
+    if (event.ctrlKey && event.key.toLowerCase() === "k") {
       event.preventDefault();
       myInput.current.focus();
     }
@@ -35,6 +43,19 @@ function Search({ data, placeholder }) {
 
   // buka suggestion
   useEffect(() => {
+    openSuggestion();
+  }, [value]);
+
+  useEffect(() => {
+    openSuggestion();
+  }, [data]);
+
+  // suggestion
+  const showSuggestion = (filteredSearch) => {
+    setSuggestion(filteredSearch);
+  };
+
+  const openSuggestion = () => {
     if (value) {
       const filteredSearch = data
         .filter((datanya) =>
@@ -50,51 +71,12 @@ function Search({ data, placeholder }) {
       showSuggestion([]);
       setIsToggle(false);
     }
-  }, [value]);
-
-  const changeValue = () => {
-    // ==!== perlu di sanitasi ==!==
-    setValue(myInput.current.value);
   };
 
-  // suggestion
-  const showSuggestion = (filteredSearch) => {
-    setSuggestion(filteredSearch);
-  };
-
-  function tambahKelas(elemen, kelas) {
-    kelas.forEach((kel) => {
-      elemen.classList.add(kel);
-    });
-  }
-
-  function hapusKelas(elemen, kelas) {
-    kelas.forEach((kel) => {
-      elemen.classList.remove(kel);
-    });
-  }
-
-  const animate = (elemenTarget) => {
-    // hapus searchSebelumnya
-    if (searchSebelumnya) {
-      hapusKelas(searchSebelumnya, [
-        "!to-emerald-700",
-        "!from-emerald-700",
-        "animate-bounceku",
-      ]);
-    }
-    setSearchSebelumnya(elemenTarget);
-
-    // jadikan searchPertama
-    tambahKelas(elemenTarget, [
-      "!to-emerald-700",
-      "!from-emerald-700",
-      "animate-bounceku",
-    ]);
-  };
-
-  const searching = (value) => {
-    const dataDicari = data.find((datanya) => datanya.namaLatin == value).nomor;
+  const searching = (namaLatin) => {
+    const dataDicari = data.find(
+      (datanya) => datanya.namaLatin == namaLatin
+    ).nomor;
 
     const elemenTarget = document.getElementById(`${dataDicari}-${dataDicari}`);
 
@@ -104,8 +86,8 @@ function Search({ data, placeholder }) {
       blockOffset: 200,
     });
 
-    animate(elemenTarget);
-    myInput.current.value = value;
+    animate(elemenTarget, true);
+    myInput.current.value = namaLatin;
     changeValue();
   };
 
@@ -113,11 +95,29 @@ function Search({ data, placeholder }) {
     <>
       <div className="flexc h-[2em] text-[0.1em] my-auto shadow relative">
         <button
-          className={`h-full px-2.5 border-2 border-r border-dark flexc rounded-s group bg-dark`}
+          onClick={() => {
+            if (isToggle) {
+              batalkanSearch();
+            }
+          }}
+          className={`
+            h-full px-2.5 
+            border-2 border-r border-dark 
+            flexc 
+            rounded-s 
+            group 
+            bg-dark
+            `}
         >
-          <i
-            className={`text-slate-300 fa-solid fa-magnifying-glass -scale-x-100`}
-          ></i>
+          {isToggle ? (
+            <i
+              className={`pl-0.5 text-slate-300 fa-solid fa-circle-xmark -scale-x-100 group-active:-scale-x-90 group-active:scale-y-90 transall`}
+            ></i>
+          ) : (
+            <i
+              className={`pl-0.5 text-slate-300 fa-solid fa-magnifying-glass -scale-x-100`}
+            ></i>
+          )}
         </button>
         <input
           onChange={(e) => {
@@ -188,7 +188,7 @@ function Search({ data, placeholder }) {
                   hover:bg-slate-100
                   flexs
                   before:content-['⇒'] before:font-bold before:mx-2
-                  focus:outline-none focus:bg-slate-200 focus:rounded-r-md
+                  focus:outline-none focus:bg-slate-300 focus:rounded-r-md
                   `}
               >
                 {value}

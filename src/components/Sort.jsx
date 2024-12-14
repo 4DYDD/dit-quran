@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 
-function Sort({ placeholder, data, setData }) {
+function Sort({ placeholder, data, setData, batalkanSearch }) {
   const sortnya = useRef(null);
 
   const [toggle, setToggle] = useState(false);
@@ -35,14 +35,15 @@ function Sort({ placeholder, data, setData }) {
   };
 
   const urutkanAsc = (urutan) => {
+    batalkanSearch();
     sortnya.current.value = `Urutkan - menu ${urutan}`;
     // ASC
     const sortedData = [...dataAwal].sort((a, b) => a.nomor - b.nomor);
     setData(sortedData);
-    console.log("Asc ↑");
   };
 
   const urutkanDesc = (urutan) => {
+    batalkanSearch();
     sortnya.current.value = `Urutkan - menu ${urutan}`;
     // DESC
     const sortedData = [...dataAwal].sort((a, b) => b.nomor - a.nomor);
@@ -50,6 +51,7 @@ function Sort({ placeholder, data, setData }) {
   };
 
   const urutkanSurahMakkiyah = (urutan) => {
+    batalkanSearch();
     sortnya.current.value = `Urutkan - menu ${urutan}`;
     // Mekah
     const sortedDataMekah = [...dataAwal].filter(
@@ -63,6 +65,7 @@ function Sort({ placeholder, data, setData }) {
   };
 
   const urutkanSurahMadaniyah = (urutan) => {
+    batalkanSearch();
     sortnya.current.value = `Urutkan - menu ${urutan}`;
     // Madinah
     const sortedDataMadinah = [...dataAwal].filter(
@@ -82,6 +85,7 @@ function Sort({ placeholder, data, setData }) {
   }, [data]);
 
   const urutkanAyatSedikit = (urutan) => {
+    batalkanSearch();
     sortnya.current.value = `Urutkan - menu ${urutan}`;
     // Ayat ASC
     const sortedData = [...dataAwal].sort(
@@ -91,6 +95,7 @@ function Sort({ placeholder, data, setData }) {
   };
 
   const urutkanAyatBanyak = (urutan) => {
+    batalkanSearch();
     sortnya.current.value = `Urutkan - menu ${urutan}`;
     // Ayat DESC
     const sortedData = [...dataAwal].sort(
