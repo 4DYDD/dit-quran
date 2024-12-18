@@ -7,10 +7,9 @@ import Scrollbars from "rc-scrollbars";
 import labelguweh from "../assets/labelguweh.png";
 import emblemguweh from "../assets/emblemguweh.png";
 
-function Ayats({ className = "", setPage }) {
+function Ayats({ className = "", surahData, setSurahData, setPage }) {
   const { nomor } = useParams();
 
-  const [surahData, setSurahData] = useState({ ayat: [] });
   const [isLoading, setIsLoading] = useState(true);
 
   const endLoading = () => {

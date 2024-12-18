@@ -4,7 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Surahs from "./Surahs";
 import Ayats from "./Ayats";
 
-function Main({ data, setPage }) {
+function Main({ data, surahData, setSurahData, setPage }) {
   return (
     <>
       <div className="block mx-auto">
@@ -14,7 +14,16 @@ function Main({ data, setPage }) {
               path="/"
               element={<Surahs data={data} setPage={setPage} />}
             />
-            <Route path="/surah/:nomor" element={<Ayats setPage={setPage} />} />
+            <Route
+              path="/surah/:nomor"
+              element={
+                <Ayats
+                  surahData={surahData}
+                  setSurahData={setSurahData}
+                  setPage={setPage}
+                />
+              }
+            />
           </Routes>
         </div>
       </div>

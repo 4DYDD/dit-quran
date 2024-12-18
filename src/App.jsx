@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 
 function App() {
   const [data, setData] = useState(null);
+  const [surahData, setSurahData] = useState({ ayat: [] });
   const [page, setPage] = useState("home");
 
   useEffect(() => {
@@ -38,8 +39,18 @@ function App() {
         renderThumbVertical={(props) => <div {...props} className="bg-dark" />}
       >
         <>
-          <Navbar data={data} setData={setData} page={page} />
-          <Main data={data} setPage={setPage} />
+          <Navbar
+            data={data}
+            surahData={surahData}
+            setData={setData}
+            page={page}
+          />
+          <Main
+            data={data}
+            surahData={surahData}
+            setSurahData={setSurahData}
+            setPage={setPage}
+          />
           <br />
         </>
         <Footer />

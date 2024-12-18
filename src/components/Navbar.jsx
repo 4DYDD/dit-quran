@@ -8,7 +8,7 @@ import Image from "./Image";
 import Search from "./Search";
 import Sort from "./Sort";
 
-function Navbar({ data, setData, page }) {
+function Navbar({ data, surahData, setData, page }) {
   const myInput = useRef(null);
 
   const [value, setValue] = useState(null);
@@ -105,8 +105,25 @@ function Navbar({ data, setData, page }) {
 
           {page == "surah" && (
             <div className="flexe !justify-center lg:!justify-end text-[1em] gap-5 w-full lg:w-[80rem] tracking-[1px]">
-              <Sort placeholder={`# development #`} />
-              <Search data={data} placeholder={`# development #`} />
+              <Sort
+                data={data}
+                setData={setData}
+                batalkanSearch={batalkanSearch}
+                animate={animate}
+                placeholder={`# development #`}
+              />
+
+              <Search
+                data={data}
+                batalkanSearch={batalkanSearch}
+                suggestion={suggestion}
+                setSuggestion={setSuggestion}
+                animate={animate}
+                myInput={myInput}
+                changeValue={changeValue}
+                value={value}
+                placeholder={`# development #`}
+              />
             </div>
           )}
 
